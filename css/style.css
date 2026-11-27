@@ -1,0 +1,554 @@
+/* =====================================================================
+   STYLE DU SITE
+   Direction artistique : codes de la presse (serif pour le texte,
+   filets noirs, noir / blanc / gris) + vert pour l'Irlande du Nord.
+   ===================================================================== */
+
+/* ---------- Variables (couleurs et tailles réutilisées) ---------- */
+:root {
+  --ink: #121212;          /* texte principal */
+  --grey: #5F6368;         /* texte secondaire (contraste suffisant sur blanc) */
+  --rule: #DCDCDC;         /* filets fins */
+  --panel: #F4F4F1;        /* fonds gris clair */
+  --green: #0B6E4F;        /* Irlande du Nord */
+  --slate: #4A5568;        /* Angleterre */
+  --orange: #B4541A;       /* prix */
+  --serif: 'Source Serif 4', Georgia, serif;
+  --sans: Inter, Arial, sans-serif;
+  --text-width: 680px;     /* largeur de la colonne de lecture */
+  --wide-width: 1040px;    /* largeur des graphiques */
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: #FFFFFF;
+}
+
+a { color: var(--ink); }
+a:hover { color: var(--green); }
+
+/* Contour visible quand on navigue au clavier */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* Lien « Skip to article » : caché, sauf au clavier */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+  background: #FFFFFF;
+  padding: 8px 12px;
+  z-index: 100;
+}
+
+/* Les deux largeurs de colonne */
+.text-column {
+  max-width: var(--text-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.wide-column {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- En-tête du journal ---------- */
+.masthead {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+  text-align: center;
+}
+.masthead-logo {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.masthead-date {
+  margin: 6px 0 14px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+/* Double filet noir sous le logo */
+.masthead::after {
+  content: '';
+  display: block;
+  height: 3px;
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+/* ---------- Barre de navigation fixe ---------- */
+.story-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--rule);
+}
+.story-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 24px;
+}
+.story-nav-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.story-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 22px;
+}
+.story-nav a {
+  display: block;
+  padding: 14px 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.progress { height: 3px; background: #EFEFEF; }
+.progress-bar {
+  height: 3px;
+  width: calc(var(--progress, 0) * 1%);   /* --progress est donné par animations.js */
+  background: var(--green);
+}
+
+/* ---------- En-tête de l'article ---------- */
+.article-header { padding-top: 44px; }
+.breadcrumb { margin: 0 0 16px; font-size: 13px; }
+.breadcrumb strong { color: var(--green); }
+.tag {
+  margin-left: 6px;
+  padding: 3px 8px;
+  background: var(--ink);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 0 0 18px;
+  font-family: var(--serif);
+  font-size: 48px;
+  line-height: 1.1;
+}
+.standfirst {
+  margin: 0 0 24px;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.45;
+  color: #3C3C3C;
+}
+.byline {
+  margin: 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--grey);
+}
+.byline strong { color: var(--ink); }
+
+/* ---------- Texte de l'article ---------- */
+.article-text {
+  padding-top: 32px;
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.65;
+}
+.article-text p { margin: 0 0 22px; }
+.article-text h3 { font-size: 25px; margin: 36px 0 10px; }
+
+/* Lettrine sur le premier paragraphe */
+.dropcap::first-letter {
+  float: left;
+  font-size: 76px;
+  line-height: 0.85;
+  font-weight: 700;
+  padding: 6px 10px 0 0;
+}
+
+/* Titres de section : filet noir au-dessus */
+.section-title {
+  margin: 0 0 12px;
+  padding-top: 10px;
+  border-top: 3px solid var(--ink);
+  font-family: var(--serif);
+  font-size: 32px;
+  line-height: 1.2;
+}
+.section-intro {
+  max-width: var(--text-width);
+  margin: 0 0 24px;
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.6;
+  color: #3C3C3C;
+}
+
+/* Encadré « Key points » */
+.key-points {
+  margin: 30px 0;
+  padding: 20px 24px;
+  background: var(--panel);
+  border-top: 4px solid var(--green);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.key-points h2 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.key-points ul { margin: 0; padding-left: 20px; }
+.key-points li { margin-bottom: 8px; }
+
+/* Citation mise en avant */
+.pull-quote {
+  margin: 34px 0;
+  padding: 18px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  font-size: 30px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+.pull-quote::before {
+  content: '“';
+  display: block;
+  font-size: 64px;
+  line-height: 0.6;
+  color: var(--green);
+}
+
+/* ---------- Graphique d'ouverture ---------- */
+.lead-figure { margin: 36px auto 0; }
+.lead-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
+  padding: 32px;
+  background: var(--panel);
+}
+.lead-number { flex: 1 1 260px; }
+.small-caps {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.big-number {
+  margin: 0 0 6px;
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--green);
+}
+.lead-bars {
+  flex: 2 1 400px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.lead-bars li {
+  display: grid;
+  grid-template-columns: 130px 1fr 60px;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.lead-bars strong { text-align: right; }
+.bar { height: 20px; background: #FFFFFF; }
+.bar-fill {
+  height: 100%;
+  width: calc(var(--value, 0) * 1%);   /* --value est donné par main.js */
+  background: #9AA0A8;
+  transform-origin: left;             /* l'animation GSAP part de la gauche */
+}
+.lead-bars .is-ni { color: var(--green); font-weight: 700; }
+.lead-bars .is-ni .bar-fill { background: var(--green); }
+
+/* ---------- Figures (graphiques) ---------- */
+figure { margin: 0; }
+.chart-figure {
+  margin-top: 28px;
+  margin-bottom: 8px;
+  padding-top: 14px;
+  border-top: 3px solid var(--ink);
+}
+.chart-title { margin: 0; font-size: 18px; }
+.chart-subtitle { margin: 4px 0 12px; font-size: 13px; color: var(--grey); }
+.chart-box { position: relative; height: 420px; }  /* hauteur du canvas */
+.is-clickable { cursor: pointer; }                  /* ajoutée par graphique-crises.js */
+figcaption {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--grey);
+}
+figcaption strong { color: var(--ink); }
+.ni-text { color: var(--green); font-weight: 700; }
+.en-text { color: var(--slate); font-weight: 700; }
+
+/* ---------- Section grise (graphique des crises) ---------- */
+.grey-section {
+  margin-top: 48px;
+  padding: 48px 0 56px;
+  background: var(--panel);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.grey-section .chart-figure {
+  background: #FFFFFF;
+  padding: 16px 20px 12px;
+}
+
+/* ---------- Boutons ---------- */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+button {
+  min-height: 44px;              /* taille confortable au doigt */
+  padding: 0 16px;
+  border: 1px solid #9AA0A8;
+  border-radius: 22px;
+  background: #FFFFFF;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover { border-color: var(--ink); }
+/* Bouton actif (aria-pressed="true") */
+button[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #FFFFFF;
+}
+/* Couleur de chaque nation (mêmes couleurs que les courbes dans data.js) */
+.nation-northernIreland { --nation-color: #0B6E4F; }
+.nation-england         { --nation-color: #4A5568; }
+.nation-scotland        { --nation-color: #2B6CB0; }
+.nation-wales           { --nation-color: #B7791F; }
+
+/* Boutons des nations : pastille de couleur */
+.nation-btn::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: var(--nation-color);
+}
+.nation-btn[aria-pressed="true"] {
+  background: #FFFFFF;
+  color: var(--ink);
+  border: 2px solid var(--nation-color);
+}
+.nation-btn[aria-pressed="false"] {
+  color: var(--grey);
+  text-decoration: line-through;
+}
+/* Boutons des crises */
+.crisis-btn { border-radius: 4px; }
+.crisis-btn[aria-pressed="true"] {
+  background: #F6C99A;
+  border-color: #D9904F;
+  color: #5A2508;
+}
+.play-btn {
+  background: var(--green);
+  border-color: var(--green);
+  color: #FFFFFF;
+}
+.play-btn:disabled { opacity: 0.5; cursor: wait; }
+
+/* ---------- Frise et fiche des crises ---------- */
+.timeline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+.crisis-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 16px;
+  padding: 18px 20px;
+  background: #FFFFFF;
+  border-top: 3px solid #D9904F;
+}
+.crisis-date {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: #8A3B0C;
+}
+.crisis-panel h3 { margin: 0 0 4px; font-size: 16px; }
+.crisis-panel p { margin: 0; font-size: 15px; line-height: 1.55; }
+
+/* ---------- Tableau de données ---------- */
+.data-table { margin-top: 16px; }
+.data-table summary,
+.about summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+.table-wrap { overflow-x: auto; background: #FFFFFF; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+caption { text-align: left; padding: 8px 12px; font-weight: 700; }
+th, td { padding: 6px 12px; border-bottom: 1px solid var(--rule); text-align: right; }
+th[scope="row"], thead th:first-child { text-align: left; }
+
+/* ---------- Graphique prix / quantités ---------- */
+.figure-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.price-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
+}
+.price-layout .chart-box { flex: 3 1 520px; height: 360px; }
+.price-stats { flex: 1 1 220px; }
+.price-stats p { margin: 0; font-size: 14px; }
+.stat-label { margin-top: 16px !important; color: var(--grey); font-size: 13px !important; }
+.stat-value { font-family: var(--serif); font-size: 26px !important; font-weight: 700; }
+.stat-value.price { color: var(--orange); }
+.stat-value.amount { color: var(--green); }
+
+/* ---------- Panier ---------- */
+.basket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0 28px;
+}
+.basket-card { padding: 14px 0 18px; border-top: 1px solid var(--rule); }
+.basket-head {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 10px;
+  font-family: var(--serif);
+  font-size: 20px;
+}
+.basket-head span { font-family: var(--sans); font-size: 14px; font-weight: 700; }
+.gap-up { color: var(--green); }
+.gap-down { color: #9A4A16; }
+.basket-line {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0 4px;
+  font-size: 13px;
+}
+.basket-bar { height: 10px; background: #EFEFEF; }
+.basket-bar-fill {
+  height: 100%;
+  width: calc(var(--value, 0) * 1%);   /* --value est donné par main.js */
+  background: #6B7280;
+  transform-origin: left;
+}
+.basket-bar-fill.is-ni { background: var(--green); }
+
+/* ---------- À propos + mots-clés ---------- */
+#about { padding-top: 40px; padding-bottom: 56px; }
+.about {
+  padding: 4px 22px 12px;
+  background: var(--panel);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.topics {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+  font-size: 13px;
+}
+.topics span {
+  display: inline-block;
+  margin: 4px 4px 0 0;
+  padding: 6px 12px;
+  border: 1px solid var(--ink);
+}
+
+/* ---------- Pied de page ---------- */
+.site-footer {
+  padding: 28px 24px;
+  background: var(--ink);
+  color: #E6E6E6;
+  font-size: 13px;
+  text-align: center;
+}
+.site-footer a { color: #FFFFFF; font-weight: 600; }
+
+/* ---------- Mobile (écrans de moins de 700 px) ---------- */
+@media (max-width: 700px) {
+  h1 { font-size: 34px; }
+  .standfirst { font-size: 19px; }
+  .article-text { font-size: 18px; }
+  .story-nav-label { display: none; }
+  .chart-box { height: 320px; }
+  .lead-bars li { grid-template-columns: 100px 1fr 54px; }
+  .pull-quote { font-size: 24px; }
+}
