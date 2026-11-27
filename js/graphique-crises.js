@@ -28,7 +28,12 @@ const crisisBandsPlugin = {
       ctx.fillStyle = (crisis.id === selectedCrisis) ? '#8A3B0C' : '#5F6368';
       ctx.font = '600 11px Inter, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(crisis.shortLabel, (left + right) / 2, area.top + 14);
+      // Sur petit écran, si le nom est plus large que la bande, on écrit son numéro (comme sur les boutons)
+      let label = crisis.shortLabel;
+      if (ctx.measureText(label).width > right - left - 4) {
+        label = String(CRISES.indexOf(crisis) + 1);
+      }
+      ctx.fillText(label, (left + right) / 2, area.top + 14);
     });
     ctx.restore();
   }
